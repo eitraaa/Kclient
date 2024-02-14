@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "browserify": "^17.0.0",
+    "ejs": "^3.1.9",
+    "kahoot.js-latest": "^1.0.0",
+    "node-fetch": "^3.2.6"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
