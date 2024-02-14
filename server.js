@@ -3,9 +3,9 @@ const ejs = require("ejs");
 const fs = require("fs");
 
 async function startServer(port) {
-  const indexPath = "page/pin/pin.ejs";
-  const cssPath = "page/pin/pin.css";
-  const pinjsPath = "page/pin/pin.js";
+  const indexPath = __dirname+"/page/pin/pin.ejs";
+  const cssPath = __dirname+"/page/pin/pin.css";
+  const pinjsPath = __dirname+"/page/pin/pin.js";
 
   const app = express();
 
