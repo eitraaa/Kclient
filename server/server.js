@@ -11,7 +11,7 @@ async function startServer(port) {
 
   app.set("view engine", "ejs");
 
-  app.get("/", (req, res) => {
+  app.get("/pin", (req, res) => {
     res.render(indexPath);
   });
 
