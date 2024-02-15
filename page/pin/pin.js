@@ -1,5 +1,3 @@
-
-
 function mfn() {
   alert("cd");
 }
@@ -18,15 +16,25 @@ function ename(pin) {
   let submitButton = document.createElement("button");
   submitButton.id = "nenter";
   submitButton.textContent = "Enter";
-  submitButton.onclick = function () {
-    jg(pin, ntxt.vakue);
-  };
   form.appendChild(submitButton);
+  document.getElementById("nenter").addEventListener("click", () => {
+    const nameInput = document.getElementById("ename").value.trim();
+    if (nameInput) {
+      joinGame(pin, nameInput);
+      console.log("done");
+    } else {
+      alert("Please enter a nickname");
+    }
+  });
 }
 
-async function epin() {
+async function epin(event) {
+  event.preventDefault();
   var gameIdInput = document.getElementById("gameId");
   var pinValue = gameIdInput.value;
-  alert(pinValue);
-  ename(pinValue);
+  if (pinValue) {
+    await ename(pinValue);
+  } else {
+    alert("Please enter a PIN");
+  }
 }

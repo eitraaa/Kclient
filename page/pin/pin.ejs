@@ -10,11 +10,14 @@
   <p id="description">K!client is a Kahoot client. (still making....)</p>
   <div id="sq"></div>
   <div id="el"></div>
-  <form id="pinarea">
+  <form id="pinarea" onsubmit="epin(event)">
     <input type="text" id="gameId" placeholder="Game PIN" inputmode="numeric" autocomplete="off" dir="auto"><br>
-    <button id="pinsubmit" onclick="epin()">Enter</button>
+    <button id="pinsubmit" type="submit">Enter</button>
   </form>
   <button id="setting" onclick="mfn()">Setting</button>
+  <p id="ver">ver: 0.1.0</p>
   <script src="pin.js"></script>
+  <script src="socket.io/socket.io.js"></script>
+  <script src="../kahoot.js"></script>
 </body>
 </html>
