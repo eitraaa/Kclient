@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Wahoot!</title>
+  <link type="text/css" href="/pin.css" rel="stylesheet">
+  <script src="/pin.js"></script> 
+  <script src="/socket.io/socket.io.js"></script> 
+  <script src="../kahoot.js"></script>
+</head>
+  <body background="https://ctcint.com/wp-content/uploads/2019/11/73-737674_blue-geometric-technology-background-technology-background-full-hd.png">
+  <h1 id="kclient">Wahoot</h1>
+  <p id="description">Wahoot is a Kahoot client. (still making....)</p>
+  <form id="pinarea" onsubmit="epin(event)">
+    <input type="text" id="gameId" placeholder="Game PIN" inputmode="numeric" autocomplete="off" dir="auto"><br>
+    <button id="gameIdsubmit" type="submit">Enter</button>
+  </form>
+  <button id="setting" onclick="setting()">Setting</button>
+  <p id="ver">ver: 0.1.5</p>
+</body>
+</html>
