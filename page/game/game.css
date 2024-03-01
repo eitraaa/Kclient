@@ -2,16 +2,9 @@ body {
   text-align: center;
 }
 
-#kclient {
-  color: white;
-  font-size: 5em;
-  margin-top: 260px;
-  position: relative;
-}
-
-#description {
-  color: white;
-  margin-top: -50px;
+#wahoot {
+  opacity: 85%;
+  margin-bottom: 5%;
 }
 
 #ver {
@@ -25,16 +18,16 @@ body {
 #nicknamesubmit {
   width: 250px;
   height: 50px;
-  margin: 0px;
-  border: 0px;
+  margin: 0;
+  border: 0;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px -4px inset;
+  box-shadow: 0px -4px inset rgba(0, 0, 0, 0.25);
   background: rgb(40, 40, 40);
   color: rgb(255, 255, 255);
   border-radius: 4px;
   font-weight: bold;
   text-align: center;
-  padding: 0px 16px 4px;
+  padding: 0 16px 4px;
   position: relative;
   font-size: 18px;
   font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -56,6 +49,12 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+.center {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
 #pinarea {
   background: rgb(255, 255, 255);
   padding: 20px;
@@ -63,8 +62,11 @@ body {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
   width: 288px;
   height: 106px;
-  margin: auto;
-  margin-top: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
 
 #setting {
@@ -81,7 +83,7 @@ body {
 }
 
 #setting:active {
-  border: 3px solid #a90ec8;
+  border-color: #0e81c8;
 }
 
 .plbox {
@@ -102,7 +104,7 @@ body {
 }
 
 #usernamebox {
-  text-shadow: 0px 0px #000000;
+  text-shadow: 0 0 #000000;
   margin-left: 90px;
   color: #000;
   text-align: left;
@@ -114,12 +116,52 @@ body {
   bottom: 15px;
   left: 20px;
 }
+
 #bar {
   position: absolute;
   bottom: 0;
   background-color: #fff;
-  height: 100px;
+  height: 9.2%;
   width: 100%;
   left: 0;
   opacity: 0.75;
+}
+
+.normal_ab {
+  position: absolute;
+  color: #fff;
+  opacity: 0.8;
+  font-size: 20px;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+  height: 43.5%;
+  width: 47.5%;
+}
+
+#red {
+  left: 2.08%;
+  background-color: rgb(226, 27, 60);
+  border: 3px solid rgb(226, 27, 60);
+}
+
+#blue {
+  right: 2.08%;
+  background-color: rgb(19, 104, 206);
+  border: 3px solid rgb(19, 104, 206);
+}
+
+#green {
+  right: 2.08%;
+  bottom: 10.2%;
+  background-color: rgb(38, 137, 12);
+  border: 3px solid rgb(38, 137, 12);
+}
+
+#yellow {
+  bottom: 10.2%;
+  left: 2.08%;
+  background-color: rgb(216, 158, 0);
+  border: 3px solid rgb(216, 158, 0);
 }
