@@ -1,3 +1,7 @@
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 
 async function ename(pin) {
   const form = document.getElementById("pinarea");
@@ -21,8 +25,7 @@ async function ename(pin) {
   submitButton.addEventListener("click", async () => {
     const nameInput = ntxt.value.trim();
     if (nameInput) {
-      await joinGame(pin, nameInput); 
-      console.log("done");
+      await joinGame(pin, nameInput);
     } else {
       alert("Please enter a nickname");
     }
@@ -41,47 +44,49 @@ async function epin(event) {
 }
 
 async function joined(name, score) {
+  $('#wahoot').animate({
+    'opacity': '0'
+  }, 1500);
+  $('#pinarea').animate({
+    'opacity': '0'
+  }, 1500);
+  $(`#ver`).animate({
+    'left': '-100px'
+  }, 1500);
+  $('#setting').animate({
+    'right':'-300px'
+  }, 1500);
+  await delay(1600);
   const gamesrc = await fetch("/page-1");
   const jsonText = await gamesrc.text();
   document.body.innerHTML = jsonText;
   document.getElementById("username").textContent = name;
   document.getElementById("score").textContent = score;
+  authCheck();
+  load();
 }
 
-function setting() {
-  let setting = {
-    "exploit" : {
-      "custom_name": true,
-      "crasher": false,
-      "morescore": {
-        "toggled": false,
-        "value": 10
-      }
-    },
-    "game": {
-      "keybind": {
-        "toggled": true,
-        "red": "q",
-        "blue": "w",
-        "yellow": "a",
-        "green": "s"
-      }
+function getMod(create) {
+  if (create) {
+    let mods = {
+      "exploit": {
+        "custom_name": true,
+        "crasher": false,
+        "morescore": {
+          "toggled": false,
+          "value": 10,
+        },
+      },
+      "game": {
+        "keybind": {
+          "toggled": true,
+          "red": "q",
+          "blue": "w",
+          "yellow": "a",
+          "green": "s",
+        },
+      },
     }
-  };
-  let arr = localStorage.getItem("setting");
-  if (arr == null) {
-    let ask = confirm("by clicking OK, you agree that we use local storage.");
-    if (ask) {
-      localStorage.setItem("setting", JSON.stringify(setting));
-    } else {
-      alert("we need to use local storage to save your data.");
-    }
-  } else {
-    const getsetting = JSON.parse(localStorage.getItem("setting"));
-    let savesetting = prompt("Setting", JSON.stringify(getsetting))
-    if (savesetting) {
-      localStorage.setItem("setting", savesetting);
-      alert("saved!");
-    }
+    return mods;
   }
 }

@@ -1,10 +1,15 @@
 body {
   text-align: center;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 #wahoot {
-  opacity: 85%;
-  margin-bottom: 5%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 50%;
+  opacity: 0.875;
 }
 
 #ver {
@@ -66,22 +71,42 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 
 #setting {
-  width: 125px;
-  height: 50px;
-  font-size: 15px;
+  padding:10px;
+  font-size: 19px;
   position: absolute;
-  background-color: #fff;
-  border: 3px solid #fff;
+  color: #fff;
+  background-color: #7d0d73;
+  background-image: url('https://kotonohaworks.com/free-icons/wp-content/uploads/kkrn_icon_haguruma_6.png');
+  background-size: contain;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left: 40px; 
+  border: 3px solid #7d0d73;
   border-radius: 70px;
   right: 20px;
   top: 20px;
   cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
 }
 
+#setting-lobby {
+  padding:20px;
+  position: absolute;
+  background-color: #7d0d73;
+  background-image: url('https://kotonohaworks.com/free-icons/wp-content/uploads/kkrn_icon_haguruma_6.png');
+  background-size: contain;
+  background-position: left center;
+  background-repeat: no-repeat;
+  border: 3px solid #860e7c;
+  border-radius: 70px;
+  right: -400px;
+  top: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
 #setting:active {
   border-color: #0e81c8;
 }
@@ -90,7 +115,7 @@ body {
   position: absolute;
   width: 200px;
   height: 50px;
-  bottom: 20px;
+  bottom: -100px;
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
@@ -113,47 +138,49 @@ body {
 #icon {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
   position: absolute;
-  bottom: 15px;
+  bottom: -75px; /*15px*/
   left: 20px;
 }
 
 #bar {
   position: absolute;
-  bottom: 0;
+  bottom: -9.2%; /* 9.2% */
   background-color: #fff;
   height: 9.2%;
   width: 100%;
   left: 0;
   opacity: 0.75;
+  backdrop-filter: blur(10px);
 }
 
 .normal_ab {
   position: absolute;
   color: #fff;
-  opacity: 0.8;
+  opacity: 65%;
   font-size: 20px;
   border-radius: 20px;
   margin-top: 10px;
   margin-left: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
   height: 43.5%;
-  width: 47.5%;
+  width: 46.35%;
+  display: none;
 }
 
 #red {
-  left: 2.08%;
+  left: 3.13%;
   background-color: rgb(226, 27, 60);
   border: 3px solid rgb(226, 27, 60);
 }
 
 #blue {
-  right: 2.08%;
+  right: 3.13%;
   background-color: rgb(19, 104, 206);
   border: 3px solid rgb(19, 104, 206);
 }
 
 #green {
-  right: 2.08%;
+  right: 3.13%;
   bottom: 10.2%;
   background-color: rgb(38, 137, 12);
   border: 3px solid rgb(38, 137, 12);
@@ -161,7 +188,21 @@ body {
 
 #yellow {
   bottom: 10.2%;
-  left: 2.08%;
+  left: 3.13%;
   background-color: rgb(216, 158, 0);
   border: 3px solid rgb(216, 158, 0);
+}
+
+#lobbytitle {
+  opacity: 0;
+  font-size: 50px;
+  color: #fff;
+  font-weight: bold;
+}
+
+#lobbysubt {
+  opacity: 0;
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
 }

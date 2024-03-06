@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Wahoot!</title>
+  <link type="text/css" href="/game.css" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script> 
+</head>
+<body>
+  <h1>Login</h1>
+  <input id="userid" type="text" placeholder="User id" autocomplete="off" dir="auto"><br>
+  <input id="password" type="password" placeholder="password" autocomplete="off" dir="auto"><br>
+  <button id="submit" onclick="login()">Submit</button>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/mypage.js"></script>
+  <script>
+    const socket = io();
+    $('document').ready(function() { 
+      let auth = JSON.parse(localStorage.getItem("auth"));
+      if (auth && auth.loginid !== undefined && auth.loginid !== -1) { 
+        window.location.href = "/home";
+      }
+    });
+
+    function login() {
+      let userid = document.getElementById("userid").value;
+      let password = document.getElementById("password").value;
+      socket.emit("login", {"id": userid, "pw": password});
+    }
+
+    socket.on("loginResult", (data) => {
+      if (data.auth == true) {
+        localStorage.setItem("auth", JSON.stringify({"id": data.id, "loginid": data.loginid}));
+        window.location.reload();
+      } else {
+        alert("Login failed");
+      }
+    });
+  </script>
+</body>
+</html>
