@@ -63,6 +63,24 @@ function logout(id, loginid) {
     return false;
   }
 } 
-module.exports = {
-  login, logout, authCheck
+
+async function getIcon(id) {
+  const query = 'SELECT mcid FROM userlist WHERE id = $1';
+  const mcidResult = await db.query(query, [id]);
+  const mcid = mcidResult.rows[0].mcid;
+  try {
+    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${mcid}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch Minecraft user data');
+    }
+    const uuid = await response.json();
+    console.log(uuid);
+    return `https://mc-heads.net/avatar/${uuid.id}`;
+  } catch (error) {
+    return 'https://example.com/default-icon.png';
+  }
 }
+
+module.exports = {
+  login, logout, authCheck, getIcon
+};

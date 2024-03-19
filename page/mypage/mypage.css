@@ -1,0 +1,15 @@
+ body {
+   background-color: rgb(255, 255, 255);
+ }
+
+#profile {
+  background-color: #a64eb1;
+  border-radius: 10px;
+  top: 5%;
+  left: 5%;
+}
+
+#icon {
+  position: absolute;
+  margin-bottom: 10px;
+}

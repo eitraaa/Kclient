@@ -24,6 +24,7 @@ async function ename(pin) {
 
   submitButton.addEventListener("click", async () => {
     const nameInput = ntxt.value.trim();
+    $('#loading').show();
     if (nameInput) {
       await joinGame(pin, nameInput);
     } else {
@@ -60,6 +61,7 @@ async function joined(name, score) {
   const gamesrc = await fetch("/page-1");
   const jsonText = await gamesrc.text();
   document.body.innerHTML = jsonText;
+  getIcon();
   document.getElementById("username").textContent = name;
   document.getElementById("score").textContent = score;
   authCheck();

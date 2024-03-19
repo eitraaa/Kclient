@@ -3,7 +3,7 @@ const http = require("http");
 const path = require("path");
 const socketio = require("socket.io");
 const kahoot = require("kahoot.js-latest");
-const { login, authCheck, logout } = require("./db.js");
+const { login, authCheck, logout, getIcon } = require("./db.js");
 
 async function startServer(port) {
   const pinPath = path.join(__dirname, "page/game/pin.ejs");
@@ -28,7 +28,7 @@ async function startServer(port) {
   app.set("view engine", "ejs");
 
   app.get("/game", (req, res) => {
-    res.render(pinPath, { "ver": "ver 0.6.4" });
+    res.render(pinPath, { "ver": "ver 0.9.0" });
   });
 
   app.get("/login", (req, res) => {
@@ -80,60 +80,98 @@ async function startServer(port) {
   });
 
   io.on("connection", (socket) => {
-    console.log("connected to websocket");
+     console.log("connected to websocket");
 
-    socket.on("authCheck", async (authData) => {
-      const result = await authCheck(authData.id, authData.loginid);
-      socket.emit("authCheckResult", result);
+     let Client = new kahoot();
+     let pin;
+     let name;
+
+     socket.on("join", async (playerData) => {
+        pin = playerData.pin;
+        name = playerData.name;
+        try {
+          await Client.join(pin, name);
+          socket.emit("joined");
+          console.log(playerData);
+        } catch (error) {
+          console.error("Error joining Kahoot game:", error);
+          socket.emit("error", "An error occurred while joining the game");
+        }
+     });
+
+     Client.on("Joined", (data) => {
+        socket.emit("joined", data);
+        console.log(data);
+     });
+
+     Client.on("QuizStart", (data) => {
+        socket.emit("QuizStart", data);
+     });
+
+    Client.on("QuestionReady", (data) => {
+        socket.emit("QuestionReady", data);
+    })
+
+     Client.on("QuestionStart", (question) => {
+        socket.emit("QuestionStart", question);
+     });
+
+    Client.on("QuestionEnd", (data) => {
+        socket.emit("QuestionEnd", data);
     });
 
-    socket.on("login", async (logindata) => {
-      const loginResult = await login(logindata.id, logindata.pw);
-      socket.emit("loginResult", loginResult);
+    Client.on("Podium", (data) => {
+        socket.emit("Podium", data);
     });
+    
+     Client.on("QuizEnd", (data) => {
+       console.log("quizend");
+        socket.emit("QuizEnd", data);
+     });
 
-    socket.on("logout", async (authData) => {
-      const data = await logout(authData.id, authData.loginid);
-      socekt.emit("logoutResult", data);
-    });
+     Client.on("Disconnect", (reason) => {
+        socket.emit("disconnectFromKahoot", reason);
+        Client.reconnect(Client.cid);
+     });
 
-    const client = new kahoot();
+     socket.on("solveSq", (arr) => {
+        Client.answerTwoFactorAuth(arr);
+     });
 
-    socket.on("join", async (playerData) => {
-      let pin = playerData.pin;
-      let name = playerData.name;
-      try {
-        await client.join(pin, name);
-        socket.emit("joined");
-        console.log(playerData);
-      } catch (error) {
-        console.error("Error joining Kahoot game:", error);
-        socket.emit("error", "An error occurred while joining the game");
-      }
-    });
+     socket.on("answer", (ans) => {
+        Client.answer(ans);
+     });
 
-    client.on("Joined", (data) => {
-      socket.emit("joined", data);
-    });
+     socket.on("authCheck", async (authData) => {
+        const result = await authCheck(authData.id, authData.loginid);
+        socket.emit("authCheckResult", result);
+     });
 
-    client.on("QuestionStart", (question) => {
-      socket.emit("newquestion");
-    });
+     socket.on("login", async (logindata) => {
+        const loginResult = await login(logindata.id, logindata.pw);
+        socket.emit("loginResult", loginResult);
+     });
 
-    socket.on("answer", (ans) => {
-      client.answer(ans);
-    });
+     socket.on("logout", async (authData) => {
+        const data = await logout(authData.id, authData.loginid);
+        socket.emit("logoutResult", data);
+     });
 
-    client.on("QuizEnd", () => {
-      console.log("The quiz has ended.");
-    });
+     socket.on("getIcon", (id) => {
+        (async () => {
+          const icon = await getIcon(id);
+          socket.emit("iconResult", icon);
+        })();
+     });
   });
+
 
   server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+   console.log(`Server is running on port ${port}`);
   });
-}
 
+
+}
 module.exports = {
   startServer,
 };

@@ -44,3 +44,16 @@ function authCheck() {
   var getAuthData = JSON.parse(localStorage.getItem("auth"));
   socket.emit("authCheck", getAuthData);
 }
+
+function getIcon() {
+  var getAuthData = JSON.parse(localStorage.getItem("auth"));
+  socket.emit("getIcon", getAuthData.id);
+}
+
+socket.on("iconResult", (url) => {
+  try {
+    document.getElementById("icon").src = url;
+  } catch (error) {
+    ;
+  }
+})

@@ -2,12 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Wahdoot!</title>
+  <title>Wahtoot!</title>
 </head>
 <body>
   <button id="test">Settings</button>
   <button id="test2"></button>
+  <div id="load"></div>
+  <p>どの動物をお供に連れていく？</p>
+  <label><input type="checkbox" value="いぬ" name="animal"><span>いぬ</span></label><!--
+  --><label><input type="checkbox" value="さる" name="animal"><span>さる</span></label><!--
+  --><label><input type="checkbox" value="きじ" name="animal"><span>きじ</span></label>
+  <input type="button" value="aaa">
   <style>
+    body {
+      overflow: hidden;
+    }
+
+    label {
+        margin-right: 5px; /* ボタン同士の間隔 */
+    }
+    label input {
+        display: none; /* デフォルトのinputは非表示にする */
+    }
+    label span {
+        color: #333; /* 文字色を黒に */
+        font-size: 14px; /* 文字サイズを14pxに */
+        border: 1px solid #333; /* 淵の線を指定 */
+        border-radius: 20px; /* 角丸を入れて、左右が丸いボタンにする */
+        padding: 5px 20px; /* 上下左右に余白をトル */
+    }
+    label input:checked + span {
+        color: #FFF; /* 文字色を白に */
+        background: #FBB; /* 背景色を薄い赤に */
+        border: 1px solid #FBB; /* 淵の線を薄い赤に */
+    }
+    #load {
+      position: absolute;
+      left: 20px;
+      bottom: 100px;
+      height: 10px;
+      width: 100px;
+      background-color: rgb(161, 21, 171);
+      border-radius: 10px;
+    }
+    
     #test {
       padding:10px;
       font-size: 19px;
